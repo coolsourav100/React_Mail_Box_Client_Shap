@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import classes from './Login.module.css'
 import { useNavigate } from 'react-router-dom';
+import { useDispatch} from 'react-redux';
+import { userAction } from '../Store/User-Slice';
 
 
 
 const Login = () => {
+    
   const navigate = useNavigate()
+  const dispatch = useDispatch()
  const [ toggle , setToggle] = useState(false)
  const [enterName , setEnterName] = useState('')
  const [enteremail , setEnterEmail] = useState('')
@@ -33,7 +37,9 @@ setToggle(!toggle)
         }
       }).then((res)=>{
         console.log(res)
-       window.localStorage.setItem('token',res.idToken)
+     dispatch(userAction.loggedInUpdater())
+     dispatch(userAction.localIdUpdater(res.localId))
+       dispatch(userAction.tokenUpdater(res.idToken))
         window.alert('LogIn Successful !!!')
         navigate('/home')
       })
@@ -55,7 +61,9 @@ setToggle(!toggle)
         }
       }).then((res)=>{
         console.log(res)
-        window.localStorage.setItem('token',res.idToken)
+        dispatch(userAction.tokenUpdater(res.idToken))
+        dispatch(userAction.localIdUpdater(res.localId))
+        dispatch(userAction.loggedInUpdater())
         window.alert('Sing Up successfull !!!')
         navigate('/home')
       })
