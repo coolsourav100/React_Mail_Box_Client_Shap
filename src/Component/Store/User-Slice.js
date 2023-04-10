@@ -4,6 +4,7 @@ const userState ={
     localId:'',
     token:'',
     isLoggedIn : false,
+    mailData:[]
 }
 
 const userReducer = createSlice({
@@ -18,6 +19,9 @@ const userReducer = createSlice({
         },
         localIdUpdater(state, action){
             state.localId = action.payload
+        },
+        mailDataUpdater(state,action){
+            state.mailData=action.payload
         }
     }
 })

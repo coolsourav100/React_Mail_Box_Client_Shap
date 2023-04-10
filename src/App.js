@@ -6,6 +6,7 @@ import Home from './Component/Page/Home';
 import NavBar from './Component/Header/NavBar';
 import MailEditor from './Component/Editor/MailEditor';
 import Inbox from './Component/Editor/Inbox';
+import Sentmail from './Component/Editor/Sentmail';
 
 function App() {
   let token = window.localStorage.getItem('token')
@@ -18,6 +19,7 @@ function App() {
       <Route path='/home' element={<Home/>}/>
       <Route path='/composemail' element={<MailEditor/>}/>
       <Route path='/inbox' element={<Inbox/>}/>
+      <Route path='/sentmail' element={<Sentmail/>}/>
       </Routes>
     </BrowserRouter>
     </>

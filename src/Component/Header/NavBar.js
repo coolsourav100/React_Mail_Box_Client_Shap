@@ -18,7 +18,7 @@ const NavBar = () => {
       <Link to='/composemail'><p class="nav-link">Compose Mail</p></Link>
       </li>
       <li class="nav-item">
-      <Link to='#'><p class="nav-link">Sent Mail</p></Link>
+      <Link to='/sentmail'><p class="nav-link">Sent Mail</p></Link>
       </li>
       <li class="nav-item">
         <Link to='inbox'><p class="nav-link">Inbox</p></Link>

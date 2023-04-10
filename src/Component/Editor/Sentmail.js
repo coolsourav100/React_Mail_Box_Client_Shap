@@ -1,9 +1,35 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
-const Inbox = () => {
+const Sentmail = () => {
+  const userData = useSelector(state=>state.user.mailData)
+  
+   useEffect(()=>{
+    (async()=>{
+      await fetch(`https://etshapreact-default-rtdb.asia-southeast1.firebasedatabase.app/${userData.localId}/sent.json`,{
+        
+        
+        headers:{
+            'Content-Type': 'application/json'
+        }
+      }
+    ).then((res)=>{
+        if(res.ok){
+            return res.json()
+          }else{
+            return res.json().then((data)=>window.alert(data.error.message))
+          }
+    })
+    .then(res=>console.log(res))
+    .catch(err=>console.log(err))
+
+    })()
+
+    return ()=>{}
+    },[])
   return (
-    <div className='container bg-warning bg-opacity-10'>
-    <h1 className='d-flex justify-content-center'>Inbox</h1>
+    <div className='container bg-light border border-light rounded'>
+    <h1 className='d-flex justify-content-center'>Sent Mail</h1>
     <div className="col-md-9">
 						<div className="row">
 							<div className="col-sm-6">
@@ -129,4 +155,4 @@ const Inbox = () => {
   )
 }
 
-export default Inbox
+export default Sentmail
