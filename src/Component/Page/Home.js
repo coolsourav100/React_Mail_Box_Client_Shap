@@ -8,7 +8,7 @@ const Home = () => {
     // console.log(first)
   return (
     <div>
-        <MailEditor/>
+        <h1 className='display-1'>Welcom to The Mail Box</h1>
     </div>
   )
 }
