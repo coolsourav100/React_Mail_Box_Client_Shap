@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import classes from './Login.module.css'
+import { useNavigate } from 'react-router-dom';
 
 
 
 const Login = () => {
-//   const navigate = useNavigate()
+  const navigate = useNavigate()
  const [ toggle , setToggle] = useState(false)
  const [enterName , setEnterName] = useState('')
  const [enteremail , setEnterEmail] = useState('')
@@ -32,9 +33,9 @@ setToggle(!toggle)
         }
       }).then((res)=>{
         console.log(res)
-       
+       window.localStorage.setItem('token',res.idToken)
         window.alert('LogIn Successful !!!')
-        // navigate('/home')
+        navigate('/home')
       })
     
     }else{
@@ -54,8 +55,9 @@ setToggle(!toggle)
         }
       }).then((res)=>{
         console.log(res)
+        window.localStorage.setItem('token',res.idToken)
         window.alert('Sing Up successfull !!!')
-        // navigate('/home')
+        navigate('/home')
       })
     }
       
