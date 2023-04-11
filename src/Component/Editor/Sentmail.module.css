@@ -1,0 +1,17 @@
+.trow{
+    /* background-color: rgb(197, 211, 206); */
+}
+.trow a{
+    text-decoration: none;
+    
+    cursor: pointer;
+    color: rgb(97, 94, 94);
+    
+}
+.trow p{
+   text-decoration: none;
+   color: rgb(14, 13, 13);
+}
+.trow span{
+    color: rgb(224, 224, 230);
+}

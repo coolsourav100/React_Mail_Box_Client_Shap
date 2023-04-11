@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { userAction } from '../Store/User-Slice'
+import classes from './NavBar.module.css'
 
 const NavBar = () => {
   const user = useSelector(state=>state.user)

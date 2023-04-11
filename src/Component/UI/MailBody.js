@@ -33,14 +33,14 @@ const MailBody = () => {
   return (
     <div className='container'>
         
-        <div className="card text-center">
+        <div className="card text-center  bg-warning p-2 text-dark bg-opacity-10">
   <div className="card-header">
     Mail
   </div>
   <div className="card-body">
     <h5 className="card-title">{`Mail From : ${userData.mailDataRecived[param].sentTo}`}</h5>
     <p className="card-subtitle mb-2 text-muted">{userData.mailDataRecived[param].subject}</p>
-    <p className="card-text">{userData.mailDataRecived[param].text}</p>
+    <p className="card-text bg-success p-2 text-dark bg-opacity-10">{userData.mailDataRecived[param].text}</p>
     
   </div>
   <div className="card-footer text-muted">

@@ -1,6 +1,9 @@
 import React, { Children, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { userAction } from '../Store/User-Slice'
+import { Link } from 'react-router-dom'
+import classes from'./Sentmail.module.css'
+
 
 const Sentmail = () => {
 	const dispatch = useDispatch()
@@ -64,12 +67,12 @@ const Sentmail = () => {
 						{key?.map((item)=>{
 
 						 return (
-									<tr>
+									<tr className={classes.trow}>
 									<td className="action"><i className="fa fa-star-o"></i></td>
 									<td className="action"><i className="fa fa-bookmark-o"></i></td>
 									<td className="name"><p href="#">{userData.mailDataSent[item].sentTo}</p></td>
-									<td className="subject"><p href="#">{userData.mailDataSent[item].subject}</p></td>
-									<td className="subject"><p href="#">{userData.mailDataSent[item].text}</p></td>
+									<td className="subject"><p href="#"><Link to={`/mailBodySent/${item}`}>{userData.mailDataSent[item].subject}</Link>Link</p></td>
+									<td className="subject"><p href="#"><Link to={`/mailBodySent/${item}`}>{userData.mailDataSent[item].text}</Link></p></td>
 									<td className="time">{userData.mailDataSent[item].time}</td>
 								</tr>
 						 )
