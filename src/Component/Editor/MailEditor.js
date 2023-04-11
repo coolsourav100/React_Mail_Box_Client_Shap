@@ -39,7 +39,9 @@ const MailEditor = () => {
             return res.json().then((data)=>window.alert(data.error.message))
           }
     })
-    .then(res=>window.alert('Mail Has Been Set Successfully !!'))
+    .then(res=>{
+     
+      window.alert('Mail Has Been Set Successfully !!')})
     .catch(err=>console.log('Error'+err))
 
     await fetch(`https://etshapreact-default-rtdb.asia-southeast1.firebasedatabase.app/${userData.localId}/mailRecived.json`,{

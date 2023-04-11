@@ -12,18 +12,19 @@ const Inbox = () => {
   const userData = useSelector(state=>state.user)
   let badge = 0
   
-   useEffect(()=>{
-    (async()=>{
-      await fetch(`https://etshapreact-default-rtdb.asia-southeast1.firebasedatabase.app/${userData.localId}/mailRecived.json`).then((res)=>{
+   
+    
+		
+       setTimeout(async()=>{await fetch(`https://etshapreact-default-rtdb.asia-southeast1.firebasedatabase.app/${userData.localId}/mailRecived.json`).then((res)=>{
         if(res.ok){
             return res.json()
           }else{
             return res.json().then((data)=>window.alert(data.error.message))}})
     .then(res=>dispatch(userAction.mailDataRecivedUpdater(res)))
-    .catch(err=>console.log(err))
-    })()
-    return ()=>{}
-    },[userData.toggle])
+    .catch(err=>console.log(err))},20000)
+    
+   
+    
 	let key
 	if(userData.mailDataRecived){
 	key = Object.keys(userData.mailDataRecived)
@@ -49,7 +50,7 @@ const Inbox = () => {
 									<div className="input-group">
 										<input type="text" className="form-control input-sm" placeholder="Search"/>
 										<span className="input-group-btn">
-      <button type="submit" name="search" className="btn btn-primary"><i className="fa fa-search"></i></button></span>
+      </span>
 									</div>			 
 								</form>
 							</div>
