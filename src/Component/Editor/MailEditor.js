@@ -17,11 +17,32 @@ const MailEditor = () => {
   const date = new Date()
   const hr = date.getHours()
   const min = date.getMinutes();
-  console.log(date)
+  
   
  const sendHandler =async(e)=>{
     e.preventDefault();
-    await fetch(`https://etshapreact-default-rtdb.asia-southeast1.firebasedatabase.app/${userData.localId}/mail.json`,{
+    await fetch(`https://etshapreact-default-rtdb.asia-southeast1.firebasedatabase.app/${userData.localId}/mailSent.json`,{
+        method:'POST',
+        body:JSON.stringify({
+            sentTo:toSender,
+            subject:subject,
+            text:contentState.blocks[0].text,
+            time:`${hr} : ${min}`,
+        }),
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    }).then((res)=>{
+        if(res.ok){
+            return res.json()
+          }else{
+            return res.json().then((data)=>window.alert(data.error.message))
+          }
+    })
+    .then(res=>window.alert('Mail Has Been Set Successfully !!'))
+    .catch(err=>console.log('Error'+err))
+
+    await fetch(`https://etshapreact-default-rtdb.asia-southeast1.firebasedatabase.app/${userData.localId}/mailRecived.json`,{
         method:'POST',
         body:JSON.stringify({
             sentTo:toSender,
@@ -40,8 +61,6 @@ const MailEditor = () => {
             return res.json().then((data)=>window.alert(data.error.message))
           }
     })
-    .then(res=>window.alert('Mail Has Been Set Successfully !!'))
-    .catch(err=>console.log('Error'+err))
     
  }
 

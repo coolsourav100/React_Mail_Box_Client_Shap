@@ -5,22 +5,22 @@ import { userAction } from '../Store/User-Slice'
 const Sentmail = () => {
 	const dispatch = useDispatch()
   const userData = useSelector(state=>state.user)
-  console.log(userData)
+  
    useEffect(()=>{
     (async()=>{
-      await fetch(`https://etshapreact-default-rtdb.asia-southeast1.firebasedatabase.app/${userData.localId}/mail.json`).then((res)=>{
+      await fetch(`https://etshapreact-default-rtdb.asia-southeast1.firebasedatabase.app/${userData.localId}/mailSent.json`).then((res)=>{
         if(res.ok){
             return res.json()
           }else{
             return res.json().then((data)=>window.alert(data.error.message))}})
-    .then(res=>dispatch(userAction.mailDataUpdater(res)))
+    .then(res=>dispatch(userAction.mailDataSentUpdater(res)))
     .catch(err=>console.log(err))
     })()
     return ()=>{}
     },[])
 	let key
-	if(userData.mailData){
-	key = Object.keys(userData.mailData)
+	if(userData.mailDataSent){
+	key = Object.keys(userData.mailDataSent)
 	}
   return (
     <div className='container bg-light border border-light rounded'>
@@ -60,95 +60,23 @@ const Sentmail = () => {
 						<div className="table-responsive">
 							<table className="table">
 								<tbody>
+								
 						{key?.map((item)=>{
 
 						 return (
 									<tr>
-									<td className="action"><input type="checkbox" /></td>
 									<td className="action"><i className="fa fa-star-o"></i></td>
 									<td className="action"><i className="fa fa-bookmark-o"></i></td>
-									<td className="name"><p href="#">{userData.mailData[item].sentTo}</p></td>
-									<td className="subject"><p href="#">{userData.mailData[item].subject}</p></td>
-									<td className="subject"><p href="#">{userData.mailData[item].text}</p></td>
-									<td className="time">{userData.mailData[item].time}</td>
+									<td className="name"><p href="#">{userData.mailDataSent[item].sentTo}</p></td>
+									<td className="subject"><p href="#">{userData.mailDataSent[item].subject}</p></td>
+									<td className="subject"><p href="#">{userData.mailDataSent[item].text}</p></td>
+									<td className="time">{userData.mailDataSent[item].time}</td>
 								</tr>
 						 )
 								})
 								}
 									</tbody>
-								{/* <tr>
-									<td className="action"><input type="checkbox" /></td>
-									<td className="action"><i className="fa fa-star-o"></i></td>
-									<td className="action"><i className="fa fa-bookmark"></i></td>
-									<td className="name"><p href="#">Larry Gardner</p></td>
-									<td className="subject"><p href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </p></td>
-									<td className="time">08:30 PM</td>
-								</tr>
-								<tr className="read">
-<td className="action"><input type="checkbox" /></td>
-									<td className="action"><i className="fa fa-star"></i></td>
-									<td className="action"><i className="fa fa-bookmark"></i></td>
-									<td className="name"><p href="#">Larry Gardner</p></td>
-									<td className="subject"><p href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </p></td>
-									<td className="time">08:30 PM</td>
-								</tr>
-								<tr>
-									<td className="action"><input type="checkbox" /></td>
-									<td className="action"><i className="fa fa-star-o"></i></td>
-									<td className="action"><i className="fa fa-bookmark-o"></i></td>
-									<td className="name"><p href="#">Larry Gardner</p></td>
-									<td className="subject"><p href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </p></td>
-									<td className="time">08:30 PM</td>
-								</tr>
-								<tr className="read">
-									<td className="action"><input type="checkbox" /></td>
-									<td className="action"><i className="fa fa-star-o"></i></td>
-									<td className="action"><i className="fa fa-bookmark-o"></i></td>
-									<td className="name"><p href="#">Larry Gardner</p></td>
-									<td className="subject"><p href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </p></td>
-									<td className="time">08:30 PM</td>
-								</tr>
-								<tr className="read">
-                                    <td className="action"><input type="checkbox" /></td>
-									<td className="action"><i className="fa fa-star-o"></i></td>
-									<td className="action"><i className="fa fa-bookmark"></i></td>
-									<td className="name"><p href="#">Larry Gardner</p></td>
-									<td className="subject"><p href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </p></td>
-									<td className="time">08:30 PM</td>
-								</tr>
-								<tr>
-                                    <td className="action"><input type="checkbox" /></td>
-									<td className="action"><i className="fa fa-star"></i></td>
-									<td className="action"><i className="fa fa-bookmark-o"></i></td>
-									<td className="name"><p href="#">Larry Gardner</p></td>
-									<td className="subject"><p href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </p></td>
-									<td className="time">08:30 PM</td>
-								</tr>
-								<tr>
-									<td className="action"><input type="checkbox" /></td>
-									<td className="action"><i className="fa fa-star-o"></i></td>
-									<td className="action"><i className="fa fa-bookmark-o"></i></td>
-									<td className="name"><p href="#">Larry Gardner</p></td>
-									<td className="subject"><p href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </p></td>
-									<td className="time">08:30 PM</td>
-								</tr>
-								<tr className="read">
-									<td className="action"><input type="checkbox" /></td>
-									<td className="action"><i className="fa fa-star"></i></td>
-									<td className="action"><i className="fa fa-bookmark"></i></td>
-									<td className="name"><p href="#">Larry Gardner</p></td>
-									<td className="subject"><p href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </p></td>
-									<td className="time">08:30 PM</td>
-								</tr>
-								<tr>
-									<td className="action"><input type="checkbox" /></td>
-									<td className="action"><i className="fa fa-star"></i></td>
-									<td className="action"><i className="fa fa-bookmark-o"></i></td>
-									<td className="name"><p href="#">Larry Gardner</p></td>
-									<td className="subject"><p href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </p></td>
-									<td className="time">08:30 PM</td>
-								</tr> 
-							</tbody>*/}
+								
 							</table>
 						</div>
 
