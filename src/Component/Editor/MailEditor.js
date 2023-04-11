@@ -6,22 +6,28 @@ import { useSelector } from 'react-redux';
 
 const MailEditor = () => {
     const userData = useSelector(state=>state.user)
-    console.log(userData)
+    // console.log(userData)
     const _contentState = ContentState.createFromText('Sample content state');
   const raw = convertToRaw(_contentState);  // RawDraftContentState JSON
   const [contentState, setContentState] = useState(raw); // ContentState JSON
 //   console.log(contentState.blocks[0].text)
   const [toSender , setTosender] = useState('');
   const [ subject , setSubject] = useState('')
-    
+  
+  const date = new Date()
+  const hr = date.getHours()
+  const min = date.getMinutes();
+  console.log(date)
+  
  const sendHandler =async(e)=>{
     e.preventDefault();
-    await fetch(`https://etshapreact-default-rtdb.asia-southeast1.firebasedatabase.app/${userData.localId}/sent.json`,{
+    await fetch(`https://etshapreact-default-rtdb.asia-southeast1.firebasedatabase.app/${userData.localId}/mail.json`,{
         method:'POST',
         body:JSON.stringify({
             sentTo:toSender,
             subject:subject,
-            text:contentState.blocks[0].text
+            text:contentState.blocks[0].text,
+            time:`${hr} : ${min}`
         }),
         headers:{
             'Content-Type': 'application/json'
@@ -33,8 +39,8 @@ const MailEditor = () => {
             return res.json().then((data)=>window.alert(data.error.message))
           }
     })
-    .then(res=>console.log(res))
-    .catch(err=>console.log(err))
+    .then(res=>window.alert('Mail Has Been Set Successfully !!'))
+    .catch(err=>console.log('Error'+err))
     
  }
 

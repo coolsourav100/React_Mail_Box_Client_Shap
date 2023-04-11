@@ -1,32 +1,27 @@
-import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import React, { Children, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { userAction } from '../Store/User-Slice'
 
 const Sentmail = () => {
-  const userData = useSelector(state=>state.user.mailData)
-  
+	const dispatch = useDispatch()
+  const userData = useSelector(state=>state.user)
+  console.log(userData)
    useEffect(()=>{
     (async()=>{
-      await fetch(`https://etshapreact-default-rtdb.asia-southeast1.firebasedatabase.app/${userData.localId}/sent.json`,{
-        
-        
-        headers:{
-            'Content-Type': 'application/json'
-        }
-      }
-    ).then((res)=>{
+      await fetch(`https://etshapreact-default-rtdb.asia-southeast1.firebasedatabase.app/${userData.localId}/mail.json`).then((res)=>{
         if(res.ok){
             return res.json()
           }else{
-            return res.json().then((data)=>window.alert(data.error.message))
-          }
-    })
-    .then(res=>console.log(res))
+            return res.json().then((data)=>window.alert(data.error.message))}})
+    .then(res=>dispatch(userAction.mailDataUpdater(res)))
     .catch(err=>console.log(err))
-
     })()
-
     return ()=>{}
     },[])
+	let key
+	if(userData.mailData){
+	key = Object.keys(userData.mailData)
+	}
   return (
     <div className='container bg-light border border-light rounded'>
     <h1 className='d-flex justify-content-center'>Sent Mail</h1>
@@ -62,18 +57,26 @@ const Sentmail = () => {
 						</div>
 						
 						<div className="padding"></div>
-						
 						<div className="table-responsive">
 							<table className="table">
-								<tbody><tr>
+								<tbody>
+						{key?.map((item)=>{
+
+						 return (
+									<tr>
 									<td className="action"><input type="checkbox" /></td>
 									<td className="action"><i className="fa fa-star-o"></i></td>
 									<td className="action"><i className="fa fa-bookmark-o"></i></td>
-									<td className="name"><p href="#">Larry Gardner</p></td>
-									<td className="subject"><p href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </p></td>
-									<td className="time">08:30 PM</td>
+									<td className="name"><p href="#">{userData.mailData[item].sentTo}</p></td>
+									<td className="subject"><p href="#">{userData.mailData[item].subject}</p></td>
+									<td className="subject"><p href="#">{userData.mailData[item].text}</p></td>
+									<td className="time">{userData.mailData[item].time}</td>
 								</tr>
-								<tr>
+						 )
+								})
+								}
+									</tbody>
+								{/* <tr>
 									<td className="action"><input type="checkbox" /></td>
 									<td className="action"><i className="fa fa-star-o"></i></td>
 									<td className="action"><i className="fa fa-bookmark"></i></td>
@@ -144,8 +147,9 @@ const Sentmail = () => {
 									<td className="name"><p href="#">Larry Gardner</p></td>
 									<td className="subject"><p href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed </p></td>
 									<td className="time">08:30 PM</td>
-								</tr>
-							</tbody></table>
+								</tr> 
+							</tbody>*/}
+							</table>
 						</div>
 
 												
