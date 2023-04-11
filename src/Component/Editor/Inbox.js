@@ -21,7 +21,7 @@ const Inbox = () => {
           }else{
             return res.json().then((data)=>window.alert(data.error.message))}})
     .then(res=>dispatch(userAction.mailDataRecivedUpdater(res)))
-    .catch(err=>console.log(err))},20000)
+    .catch(err=>console.log(err))},2000)
     
    
     
