@@ -27,7 +27,8 @@ const MailEditor = () => {
             sentTo:toSender,
             subject:subject,
             text:contentState.blocks[0].text,
-            time:`${hr} : ${min}`
+            time:`${hr} : ${min}`,
+            read:false
         }),
         headers:{
             'Content-Type': 'application/json'
